@@ -8,6 +8,7 @@ import django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "word_counter.settings")
 django.setup()
 from word_app.models import lyrics
+import time
 
 def getData(keyword):
     chrome_options = Options()
@@ -60,16 +61,18 @@ def getData(keyword):
     #     print('-----')
     try:
         lyrics_search_link = search_result.get('href')
-        song_name = search_result.getText().split()[0]
+        song_name = search_result.getText().split("\n")[0].split("-")[0].rstrip()
         print("노래 제목 \t: " + song_name)
         print("추출한 주소 \t:\n" + lyrics_search_link)
-        print()
-        if song_name not in keyword:
+        print(song_name not in keyword)
+        print(keyword not in song_name)
+        if (song_name not in keyword) and (keyword not in song_name):
+            print(keyword)
             print("검색결과가 일치하지 않습니다.")
-            return "검색결과가 일치하지 않습니다."
+            return {"error":"검색결과가 일치하지 않습니다."}
     except:
         print("페이지를 찾지 못했습니다.")
-        return "페이지를 찾지 못했습니다."
+        return {"error":"페이지를 찾지 못했습니다."}
     web.get(lyrics_search_link)
     soup = BeautifulSoup(web.page_source, 'html.parser')
 
@@ -78,11 +81,13 @@ def getData(keyword):
     tag_string = []
     for s in soup.select('table.tabletext > tbody > tr'):
         tag_string.append(s.getText())
+        print(s.getText())
     return {song_name:'\n'.join(tag_string)}
 
 def save_data(keyword):
     for t, l in getData(keyword).items():
-        lyrics(name=t, lyrics=l).save()
+        if t is not "error":
+            lyrics(name=t, lyrics=l).save()
 
 
 if __name__ == '__main__':

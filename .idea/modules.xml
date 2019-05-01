@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/HW_wordcounter.iml" filepath="$PROJECT_DIR$/.idea/HW_wordcounter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../HW_wordcounter2/.idea/HW_wordcounter2.iml" filepath="$PROJECT_DIR$/../HW_wordcounter2/.idea/HW_wordcounter2.iml" />
     </modules>
   </component>
 </project>

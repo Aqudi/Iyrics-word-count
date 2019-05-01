@@ -16,7 +16,7 @@
             margin:10px;
         }
         div.ml{
-            margin-left:-20px;
+            margin-left:-15px;
         }
     </style>
     <title>Title</title>
@@ -25,19 +25,13 @@
 <div class="row">
 <div class ="alert alert-success col-4 m" role="alert">
     <div class="text-center">
-        <h4>노래제목 : {{ name }}</h4>
-    </div>
-    <div class="text-center">
-        {% for line in lyrics %}
-            {{ line }}
-        <br>
-        {% endfor %}
+        <h4>Word Counter</h4>
     </div>
 </div>
 <div class ="alert alert-success col-3 m" role="alert">
     <div class="text-center">
         {% for t, v in word_dict %}
-            {% if  forloop.counter|divisibleby:2%}
+            {% if forloop.counter|divisibleby:2 %}
             {% else %}
                 {{ t }} : {{ v }}
                 <br>
