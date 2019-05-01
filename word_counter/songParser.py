@@ -4,6 +4,10 @@ from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
 import urllib, traceback, os, sys
+import django
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "word_counter.settings")
+django.setup()
+from word_app.models import lyrics
 
 def getData(keyword):
     chrome_options = Options()
@@ -71,9 +75,19 @@ def getData(keyword):
 
     # for s in soup.select('table.tabletext > tbody > tr'):
     #     print(s.getText())
+    tag_string = []
+    for s in soup.select('table.tabletext > tbody > tr'):
+        tag_string.append(s.getText())
+    return {song_name:'\n'.join(tag_string)}
 
-    return soup.select('table.tabletext > tbody > tr')
+def save_data(keyword):
+    for t, l in getData(keyword).items():
+        lyrics(name=t, lyrics=l).save()
 
 
 if __name__ == '__main__':
-    getData("엔플라잉 옥탑방")
+    for t, l in getData("엔플라잉 옥탑방").items():
+        print(t)
+        print(l)
+        lyrics(name=t, lyrics=l).save()
+

@@ -66,14 +66,14 @@
 <body class='body'>
 <div class='container'>
 
-
-    <form action="{% url 'result' %}" class="flex">
+            {#  lyrics model의 id값을 url의 요소로 넘겨줌  #}
+    <form action="{% url 'result' lyrics.id %}" class="flex">
         <div class="inline">
             <h1 class="coloerd">Hello My name is Taejung</h1>
             <h2>This is WordCounter</h2>
 
             <h3 class="inline">음악의 가사를 검색하시려면 체크하시고 -></h3>
-            <input class="inline" name="song" type="checkbox" value="노래검색"></input>
+            <input class="inline" name="checkbox" type="checkbox"></input>
             <input class ="inline" type="submit" value="결과보기" ></input>
         </div>
         <br>

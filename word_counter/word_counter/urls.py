@@ -21,5 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', word_app.views.home, name="home"),
     path('about/', word_app.views.about, name="about"),
-    path('result/', word_app.views.result, name="result"),
+    path('result/<int:lyrics_id>', word_app.views.result, name="result"),
 ]
