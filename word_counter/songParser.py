@@ -41,7 +41,7 @@ def getData(keyword):
             'sourceid': 'chrome',
             'ie': 'UTF-8',
          }
-    
+
     # URL형식으로 변환
     query_string = urllib.parse.urlencode(values)
 
