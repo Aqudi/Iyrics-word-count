@@ -21,7 +21,7 @@ def getData(keyword):
         # print(drive_path)
         web = webdriver.Chrome(executable_path=drive_path, options=chrome_options)
     except:
-        drive_path = os.path.abspath("songParser\chromedriver.exe")
+        drive_path = os.path.abspath("chromedriver")
         # print(drive_path)
         web = webdriver.Chrome(executable_path=drive_path, options=chrome_options)
 
